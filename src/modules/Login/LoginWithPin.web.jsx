@@ -7,10 +7,10 @@ import { loginWithPin } from './Login.middleware'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
 import t from 'lib/web/LocaleStrings'
-
 import Button from 'react-toolbox/lib/button'
-
 import Input from 'react-toolbox/lib/input'
+import buttonOverride from 'theme/buttonOverride.scss'
+
 class Login extends Component {
 
   submit = () => {
@@ -95,7 +95,7 @@ class Login extends Component {
 
     return (
       <div style={{padding: '0 0.8em', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-        <Button flat neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
+        <Button theme={buttonOverride} neutral={false} style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
           { this.props.user ? this.props.user : 'No User Selected' }
         </Button>
 
@@ -124,7 +124,7 @@ class Login extends Component {
           />
         </div>
 
-        <Button flat neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
+        <Button theme={buttonOverride} neutral={false} style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}
