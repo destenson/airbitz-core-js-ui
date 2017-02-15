@@ -1,0 +1,8 @@
+.flat:not([disabled]) {
+  color:#2196f3;
+  border-radius: 0;
+
+  &:hover {
+    background: transparent;
+  }
+}
