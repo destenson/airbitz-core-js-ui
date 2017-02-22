@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
-import { browserHistory } from 'react-router'
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
@@ -181,13 +181,15 @@ const style = {
 
   }
 }
-export default connect(state => ({
 
-  username: state.login.username,
-  password: state.login.password,
-  viewPassword: state.login.viewPassword,
-  whiteOverlayVisible: state.whiteOverlayVisible,
-  showCachedUsers: state.login.showCachedUsers,
-  viewPIN: state.login.viewPIN
+export default withRouter(
+  connect(state => ({
 
-}))(Login)
+    username: state.login.username,
+    password: state.login.password,
+    viewPassword: state.login.viewPassword,
+    whiteOverlayVisible: state.whiteOverlayVisible,
+    showCachedUsers: state.login.showCachedUsers,
+    viewPIN: state.login.viewPIN
+
+  })))(Login)

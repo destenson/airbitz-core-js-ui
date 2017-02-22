@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory, withRouter } from 'react-router'
+import { withRouter } from 'react-router'
 
 import { openLogin, loginPIN, openUserList, closeUserList } from './Login.action'
 import { loginWithPin } from './Login.middleware'
@@ -134,13 +134,13 @@ class Login extends Component {
   }
 }
 
-Login = withRouter(Login)
-export default connect(state => ({
+export default withRouter(
+  connect(state => ({
 
-  pin: state.login.pin,
-  pinDummy: state.login.pinDummy,
-  user: state.cachedUsers.selectedUserToLogin,
-  showCachedUsers: state.login.showCachedUsers
+    pin: state.login.pin,
+    pinDummy: state.login.pinDummy,
+    user: state.cachedUsers.selectedUserToLogin,
+    showCachedUsers: state.login.showCachedUsers
 
-}))(Login)
+  })))(Login)
 
