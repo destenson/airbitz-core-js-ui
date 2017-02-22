@@ -182,14 +182,14 @@ const style = {
   }
 }
 
-export default withRouter(
-  connect(state => ({
+Login = withRouter(Login)
+export default connect(state => ({
 
-    username: state.login.username,
-    password: state.login.password,
-    viewPassword: state.login.viewPassword,
-    whiteOverlayVisible: state.whiteOverlayVisible,
-    showCachedUsers: state.login.showCachedUsers,
-    viewPIN: state.login.viewPIN
+  username: state.login.username,
+  password: state.login.password,
+  viewPassword: state.login.viewPassword,
+  whiteOverlayVisible: state.whiteOverlayVisible,
+  showCachedUsers: state.login.showCachedUsers,
+  viewPIN: state.login.viewPIN
 
-  })))(Login)
+}))(Login)
