@@ -7,7 +7,8 @@ import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
-class Container extends Component {
+
+class SignupContainer extends Component {
 
   handleToggle = () => {
     // this.refs.loginWithAirbitz.cancelRequest()
@@ -59,4 +60,4 @@ export default connect(state => ({
 
   loader: state.loader
 
-}))(Container)
+}))(SignupContainer)
