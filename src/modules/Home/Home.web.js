@@ -9,9 +9,11 @@ import { withRouter } from 'react-router'
 
 import ChangePin from '../ChangePin/ChangePin.web'
 import ChangePassword from '../ChangePassword/ChangePassword.web'
+import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 
 import { showPinView } from '../ChangePin/ChangePin.action'
 import { showPasswordView } from '../ChangePassword/ChangePassword.action'
+import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
 
 class Home extends Component {
 
@@ -31,6 +33,12 @@ class Home extends Component {
     )
   }
 
+  _handlePasswordRecovery = () => {
+    this.props.dispatch(
+      showPasswordRecoveryView()       
+    )
+  }
+
   render () {
     return (
       <Card>
@@ -38,14 +46,16 @@ class Home extends Component {
         Manage Account
         </CardTitle>
         <CardText>
-          <p><Link href='#' onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
-          <p><Link href='#' onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
+          <p><Link onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
+          <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
+          <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
         </CardText>
         <CardActions>
           <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('drawer_logout')}</Button>
         </CardActions>
         <ChangePin />
         <ChangePassword />
+        <PasswordRecovery />
       </Card>
     )
   }
