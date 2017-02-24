@@ -12,8 +12,7 @@ import Dropdown from 'react-toolbox/lib/dropdown'
 
 import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
-import Button from 'react-toolbox/lib/button'
-
+import Button from 'react-toolbox/lib/button' 
 import Input from 'react-toolbox/lib/input'
 import signinButton from 'theme/signinButton.scss';
 import skipButton from 'theme/skipButton.scss';

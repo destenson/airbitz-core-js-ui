@@ -173,6 +173,7 @@ const strings = {
   activity_signup_failed: 'Sign Up Failed',
   activity_change_password_failed: 'Change Password Failed',
   activity_change_pin_failed: 'Change PIN Failed',
+  activity_change_pin_length: 'PIN must be exactly 4 numbers',
   fragment_signup_creating_account: 'Creating and securing account…',
   fragment_signup_creating_wallet: 'Creating and securing wallet…',
   activity_signup_title_change_password: 'Change Password',

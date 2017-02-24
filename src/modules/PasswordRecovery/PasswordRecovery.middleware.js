@@ -26,15 +26,13 @@ export const checkPasswordRecovery = (payload, callback) => {
     }
 
     payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
-      console.log(error)
-      console.log(token)
       if (error) {
+        callback(error)
         return dispatch(openErrorModal(t('server_error_no_connection')))
       }
       if (!error) {
         dispatch(setPasswordRecoveryToken(token))
-        dispatch(showPasswordRecoveryTokenView())
-        return callback()
+        return dispatch(showPasswordRecoveryTokenView())
       }
     })
   }

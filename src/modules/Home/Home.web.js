@@ -18,7 +18,9 @@ import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.a
 class Home extends Component {
 
   _handleLogout = () => {
-    this.props.router.push('/')
+    if (window.parent.exitCallback) {
+      window.parent.exitCallback()
+    }
   }
 
   _handleChangePin = () => {
@@ -42,16 +44,15 @@ class Home extends Component {
   render () {
     return (
       <Card>
-        <CardTitle>
-        Manage Account
-        </CardTitle>
         <CardText>
+          <h1>Manage Account</h1>
+          <h2>Account: { this.props.user ? this.props.user.username : '' }</h2>
           <p><Link onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
           <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
           <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
         </CardText>
         <CardActions>
-          <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('drawer_logout')}</Button>
+          <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
         </CardActions>
         <ChangePin />
         <ChangePassword />
