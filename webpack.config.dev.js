@@ -37,11 +37,11 @@ module.exports = {
     })
   ],
   module: {
-    preLoaders: [
-
-    ],
     loaders: [
-            { test: /\.json$/, loader: 'json-loader' },
+      { 
+        test: /\.json$/, 
+        loader: 'json-loader' 
+      },
       {
         test: /\.jsx?$/,
         exclude: [/native/, /\.rn\.js$/],
