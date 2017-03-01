@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  context: __dirname,
   devtool: 'inline-source-map',
   entry: {
       bundle: 'index.web',
@@ -22,15 +23,14 @@ module.exports = {
   resolve: {
     extensions: ['', '.scss', '.css', '.js', '.jsx', '.json', '.png', '.jpg'],
     modulesDirectories: [
-      'node_modules',
       path.resolve(__dirname, './node_modules'),
       path.resolve('./src')
 
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'sample-iframe.html',
       template: 'src/sample/sample-iframe.html'
@@ -50,7 +50,9 @@ module.exports = {
       }, {
         test: /(\.scss|\.css)$/,
         include: [/node_modules\/react-toolbox\//, /src\//],
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+        loader: ExtractTextPlugin.extract(
+          [ 'style-loader','css-loader','sass-loader','postcss-loader' ], 
+          'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       },
       {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
