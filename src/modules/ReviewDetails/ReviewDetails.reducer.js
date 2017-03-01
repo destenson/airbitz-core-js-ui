@@ -29,3 +29,15 @@ export const view = (state = false, action) => {
   }
 }
 
+export const afterQuestionPasswordRecoveryView = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.SHOW_PASSWORD_RECOVERY_AFTER_REVIEW:
+      return true
+
+    case ACTION.HIDE_PASSWORD_RECOVERY_AFTER_REVIEW:
+      return false
+
+    default:
+      return state
+  }
+}
