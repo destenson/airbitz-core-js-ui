@@ -43,21 +43,17 @@ class Home extends Component {
 
   render () {
     return (
-      <Card>
-        <CardText>
-          <h1>Manage Account</h1>
-          <h2>Account: { this.props.user ? this.props.user.username : '' }</h2>
-          <p><Link onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
-          <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
-          <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
-        </CardText>
-        <CardActions>
-          <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
-        </CardActions>
+      <div>
+        <h1>Manage Account</h1>
+        <h2>Account: { this.props.user ? this.props.user.username : '' }</h2>
+        <p><Link onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
+        <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
+        <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
+        <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
         <ChangePin />
         <ChangePassword />
         <PasswordRecovery />
-      </Card>
+      </div>
     )
   }
 
