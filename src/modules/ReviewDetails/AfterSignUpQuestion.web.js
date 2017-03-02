@@ -2,20 +2,54 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import { browserHistory } from 'react-router'
+import Dialog from 'react-toolbox/lib/dialog'
 
-const abcuiContext = window.parent.abcuiContext.vendorName
-const vendorName = abcuiContext.vendorName
+import { showPasswordRecovery, hidePasswordRecovery } from './ReviewDetails.action'
+import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
+
+const abcuiContext = window.parent.abcuiContext
+const vendorName = abcuiContext ?  abcuiContext.vendorName : null
 
 class Review extends Component {
+
+  _handleHideModal = () => {
+    this.props.dispatch(
+      hidePasswordRecovery()
+    )
+  }
+
+  _handleFinish = () => {
+    if (!error) {
+      if (window.parent.loginCallback) {
+        window.parent.loginCallback(null, account)
+      }
+    }
+  }
+
+  _handleOpenPasswordRecovery = () => {
+    this.props.dispatch(
+      showPasswordRecoveryView()
+    )
+  }
+
+	actions = [
+		{ label: t('password_check_check_later'),               onClick: this._handleFinish },
+		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery }
+	];
   
   render () {
       return (
-        <div>
-          <h3>t('activity_recovery_account_created')</h3> 
-          <p>String.format(t('fragment_recovery_account_created_fragment_1'), vendorName || 'Airbitz')</p> 
-          <p>String.format(t('fragment_recovery_account_created_fragment_2'), vendorName || 'Airbitz')</p> 
-          <p>t('fragment_recovery_account_created_fragment_3')</p> 
-        </div>
+        <Dialog
+          actions={this.actions}
+          active={this.props.view}
+          onEscKeyDown={this._handleHideModal}
+          onOverlayClick={this._handleHideModal}
+          title={t('activity_recovery_account_created')}
+        >
+          <p>{ String.format(t('fragment_recovery_account_created_fragment_1'), vendorName || 'Airbitz') }</p> 
+          <p>{ String.format(t('fragment_recovery_account_created_fragment_2'), vendorName || 'Airbitz') }</p> 
+          <p>{ t('fragment_recovery_account_created_fragment_3') }</p> 
+        </Dialog>
       )
   }
 }
