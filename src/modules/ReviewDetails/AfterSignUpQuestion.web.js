@@ -36,7 +36,7 @@ class Review extends Component {
 		{ label: t('password_check_check_later'),               onClick: this._handleFinish },
 		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery }
 	];
-  
+
   render () {
       return (
         <Dialog
@@ -46,9 +46,11 @@ class Review extends Component {
           onOverlayClick={this._handleHideModal}
           title={t('activity_recovery_account_created')}
         >
-          <p>{ String.format(t('fragment_recovery_account_created_fragment_1'), vendorName || 'Airbitz') }</p> 
-          <p>{ String.format(t('fragment_recovery_account_created_fragment_2'), vendorName || 'Airbitz') }</p> 
-          <p>{ t('fragment_recovery_account_created_fragment_3') }</p> 
+          <p>{ String.format(t('fragment_recovery_account_created_fragment_1'), vendorName || 'Airbitz') }</p>
+          <br />
+          <p>{ String.format(t('fragment_recovery_account_created_fragment_2'), vendorName || 'Airbitz') }</p>
+          <br />
+          <p>{ t('fragment_recovery_account_created_fragment_3') }</p>
         </Dialog>
       )
   }

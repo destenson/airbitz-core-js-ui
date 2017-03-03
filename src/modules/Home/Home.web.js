@@ -25,27 +25,27 @@ class Home extends Component {
 
   _handleChangePin = () => {
     this.props.dispatch(
-      showPinView()       
+      showPinView()
     )
   }
 
   _handleChangePassword = () => {
     this.props.dispatch(
-      showPasswordView()       
+      showPasswordView()
     )
   }
 
   _handlePasswordRecovery = () => {
     this.props.dispatch(
-      showPasswordRecoveryView()       
+      showPasswordRecoveryView()
     )
   }
 
   render () {
     return (
       <div>
-        <h1>Manage Account</h1>
-        <h2>Account: { this.props.user ? this.props.user.username : '' }</h2>
+        <h5>Manage Account</h5>
+        <h6>Account: { this.props.user ? this.props.user.username : '' }</h6>
         <p><Link onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
         <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
         <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
