@@ -38,9 +38,9 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { 
-        test: /\.json$/, 
-        loader: 'json-loader' 
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
         test: /\.jsx?$/,
@@ -49,8 +49,7 @@ module.exports = {
         include: path.join(__dirname, 'src')
       }, {
         test: /(\.scss|\.css)$/,
-        include: [/node_modules\/react-toolbox\//, /src\//],
-        loader: ExtractTextPlugin.extract([ 'style-loader', 'css-loader', 'sass-loader' ], 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       },
       {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
