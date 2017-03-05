@@ -9,7 +9,7 @@ import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action
 import t from 'lib/web/LocaleStrings'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { showWhiteOverlay } from '../Landing.action'
-import Button from 'react-toolbox/lib/button'
+import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import Link from 'react-toolbox/lib/link'
 
@@ -147,7 +147,7 @@ class Login extends Component {
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
             <Link onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" />
-            <Button style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+            <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}} />
             <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
           </div>
