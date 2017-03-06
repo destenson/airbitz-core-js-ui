@@ -18,3 +18,18 @@
   font-size:  $unit * 2.0;
   text-transform: none;
 }
+
+.inputDiv {
+  width: 165px;
+}
+
+.inputPin {
+ text-align: center;
+ height: $unit * 4.5;
+}
+
+.exitPin {
+  margin: $unit * 2 0;
+}
+
+
