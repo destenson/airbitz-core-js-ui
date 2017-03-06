@@ -1,0 +1,32 @@
+.container {
+  padding: 0 $unit * 5;
+}
+
+.section {
+  margin: $unit * 2.5 0;
+}
+
+.inputField {
+  width: 95%;
+}
+
+.usernameText{
+  white-space: pre-line;
+}
+
+.buttonSection {
+  @extend .section;
+
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+  justify-content: center;
+  -webkit-justify-content: center;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+}

@@ -150,7 +150,7 @@ const strings = {
   fragment_landing_detail_text: 'Bitcoin Wallet',
   fragment_landing_swipe_text: 'Swipe to View Business Directory',
   fragment_landing_arrow_description: 'Bouncing Arrow',
-  fragment_landing_username_hint: 'User Name',
+  fragment_landing_username_hint: 'Username',
   fragment_landing_password_hint: 'Password',
   fragment_landing_signin_button: 'Sign In',
   fragment_landing_signup_button: 'Sign Up',
