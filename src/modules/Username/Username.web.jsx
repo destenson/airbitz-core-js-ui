@@ -39,7 +39,7 @@ class UsernameComponent extends Component {
 
   _handleBack = () => {
     if (this.props.loader.loading === false) {
-      this.props.dispatch(fadeWhiteOverlay())
+      // this.props.dispatch(fadeWhiteOverlay())
       this.props.router.goBack()
     }
   }

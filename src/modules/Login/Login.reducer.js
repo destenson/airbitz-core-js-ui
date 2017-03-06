@@ -8,6 +8,12 @@ export const viewPassword = (state = false, action) => {
       return true
     case ACTION.CLOSE_LOG_IN :
       return false
+    case ACTION.OPEN_LOG_IN_USING_PIN:
+      return false
+    case ACTION.CLOSE_LOG_IN_USING_PIN :
+      return true
+    case SELECT_USER_LOGIN :
+      return false
     default:
       return state
   }
@@ -19,6 +25,10 @@ export const viewPIN = (state = false, action) => {
       return true
     case ACTION.CLOSE_LOG_IN_USING_PIN :
       return false
+    case ACTION.OPEN_LOG_IN :
+      return false
+    case ACTION.CLOSE_LOG_IN :
+      return true
     case SELECT_USER_LOGIN :
       return true
     case REMOVE_USER_LOGIN :

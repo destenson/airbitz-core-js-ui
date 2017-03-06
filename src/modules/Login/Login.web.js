@@ -52,7 +52,7 @@ class Login extends Component {
   _handleOpenForgotPasswordModal = () => {
     this.props.dispatch(openForgotPasswordModal())
   }
-  changeUsername = (username) => {
+  _changeUsername = (username) => {
     this.props.dispatch(loginUsername(username))
   }
   changePassword = (password) => {
@@ -88,6 +88,7 @@ class Login extends Component {
 
   render () {
 
+    console.log(this.props.viewPIN)
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -128,8 +129,8 @@ class Login extends Component {
               <Input
                 ref='loginUsername'
                 className={styles.inputFields}
-                placeholder={t('fragment_landing_username_hint')}
-                onChange={this.changeUsername}
+                label={t('fragment_landing_username_hint')}
+                onChange={this._changeUsername}
                 value={this.props.username}
                 onFocus={this.usernameFocused}
                 autoCorrect={false}
@@ -175,7 +176,6 @@ export default connect(state => ({
   viewPassword: state.login.viewPassword,
   username: state.login.username,
   password: state.login.password,
-  whiteOverlayVisible: state.whiteOverlayVisible,
   showCachedUsers: state.login.showCachedUsers
 
 }))(Login)
