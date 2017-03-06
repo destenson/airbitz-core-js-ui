@@ -15,9 +15,10 @@ import Link from 'react-toolbox/lib/link'
 
 import LoginWithPin from './LoginWithPin.web'
 import signinButton from 'theme/signinButton.scss'
-import loginUsernameInput from 'theme/loginUsernameInput.scss'
 import LoginEdge from './LoginEdge.web'
 import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
+
+import styles from './Login.style.scss'
 
 class Login extends Component {
 
@@ -84,6 +85,8 @@ class Login extends Component {
   }
 
   render () {
+
+
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -91,69 +94,82 @@ class Login extends Component {
         return null
       }
     }
+
     let heightBelowView = '90px'
     let heightFieldsView = 0
     let opacityFieldsView = 0
+
     if (this.props.viewPassword) {
       heightBelowView = 0
       heightFieldsView = '90px'
       opacityFieldsView = 1
     }
+
     if (this.props.viewPIN) {
       return (<LoginWithPin />)
     }
-    return (
-      <div style={style.container}>
-        <LoginEdge />
-        <ForgotPassword />
-        <div style={style.form}>
 
-          <div ref='fieldsView' style={{
-              padding: '0 0.4em',
-              flex: 1,
-              position: 'relative',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              opacity: opacityFieldsView,
-              height: heightFieldsView
-            }}>
+    if(!this.props.viewPassword && !this.props.viewPIN){
+      return (
+        <div className={styles.container}>
+          <LoginEdge />
+          <div className={styles.buttonGroup}>
+            <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+            <div ref='fieldsBelowView' style={{height: '90px'}} />
+            <a>Already have an account? Log in</a>
+          </div>
+          <ForgotPassword />
+        </div>
+      )
+    }
 
-            <Input
-              theme={loginUsernameInput}
-              ref='loginUsername'
-              placeholder={t('fragment_landing_username_hint')}
-              onChange={this.changeUsername}
-              value={this.props.username}
-              onFocus={this.usernameFocused}
-              autoCorrect={false}
-              autoCapitalize={false}
-              onKeyPress={this.usernameKeyPressed}
-            />
+    if(this.props.viewPassword && !this.props.viewPIN){
+      return (
+        <div style={style.container}>
+          <div style={style.form}>
+            <LoginEdge />
+            <div ref='fieldsView' className={styles.fieldsView}>
 
-            <form onSubmit={e => this.handleSubmit(e)}>
               <Input
-                type='password'
-                ref='password'
-                onFocus={this.passwordFocused}
-                placeholder={t('fragment_landing_password_hint')}
-                onChange={this.changePassword}
-                value={this.props.password}
+                ref='loginUsername'
+                className={styles.inputFields}
+                placeholder={t('fragment_landing_username_hint')}
+                onChange={this.changeUsername}
+                value={this.props.username}
+                onFocus={this.usernameFocused}
                 autoCorrect={false}
                 autoCapitalize={false}
+                onKeyPress={this.usernameKeyPressed}
               />
-            </form>
-            {cUsers()}
+
+              <form onSubmit={e => this.handleSubmit(e)}>
+                <Input
+                  type='password'
+                  ref='password'
+                  className={styles.inputFields}
+                  onFocus={this.passwordFocused}
+                  label={t('fragment_landing_password_hint')}
+                  onChange={this.changePassword}
+                  value={this.props.password}
+                  autoCorrect={false}
+                  autoCapitalize={false}
+                />
+              </form>
+              {cUsers()}
+            </div>
+            <div className={styles.buttonGroup}>
+              <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+              <br />
+              <a>Create a New Account</a>
+              <br />
+              <a className={styles.forgotPassword}>Forgot Password</a>
+            </div>
           </div>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-            <Link onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" />
-            <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
-            <div ref='fieldsBelowView' style={{height: heightBelowView}} />
-            <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
-          </div>
+          <ForgotPassword />
         </div>
-      </div>
-    )
+      )
+    }
+
   }
 }
 
@@ -166,9 +182,11 @@ const style = {
     justifyContent: 'center',
     alignItems: 'stretch'
   },
+
   form: {
     flex: 1
   },
+
   whiteTransitionFade: {
     position: 'absolute',
     backgroundColor: '#FFF',
@@ -178,20 +196,23 @@ const style = {
     left: 0,
     right: 0
   },
-
-  fieldsView: {
-
-  }
 }
+
+            // <div className={styles.buttonGroup}>
+            //   <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+            //   <a>Create a New Account</a>
+            //   <br />
+            //   <a>Forgot Password</a>
+            // </div>
 
 Login = withRouter(Login)
 export default connect(state => ({
 
+  viewPIN: state.login.viewPIN,
+  viewPassword: state.login.viewPassword,
   username: state.login.username,
   password: state.login.password,
-  viewPassword: state.login.viewPassword,
   whiteOverlayVisible: state.whiteOverlayVisible,
-  showCachedUsers: state.login.showCachedUsers,
-  viewPIN: state.login.viewPIN
+  showCachedUsers: state.login.showCachedUsers
 
 }))(Login)

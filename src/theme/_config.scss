@@ -32,3 +32,12 @@ p {
   font-size: $unit * 1.8;
 }
 
+a {
+  font-size: $unit * 1.4;
+  color: #007AFF;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
