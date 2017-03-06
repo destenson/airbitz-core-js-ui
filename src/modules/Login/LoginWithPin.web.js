@@ -125,9 +125,9 @@ class LoginWithPin extends Component {
             autoCorrect={false}
           />
         </div>
-        <Button flat theme={buttonTheme} onClick={this.viewPasswordInput}>
+        <a onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
-        </Button>
+        </a>
         {cUsers()}
       </div>
     )

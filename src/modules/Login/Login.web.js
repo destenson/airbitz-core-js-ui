@@ -43,9 +43,14 @@ class Login extends Component {
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
   }
-  handleSignup = () => {
-    this.props.dispatch(showWhiteOverlay())
+  _handleGoToSignupPage = () => {
     this.props.router.push('/signup')
+  }
+  _handleOpenLoginWithPasswordPage = () => {
+    this.props.dispatch(openLogin())
+  }
+  _handleOpenForgotPasswordModal = () => {
+    this.props.dispatch(openForgotPasswordModal())
   }
   changeUsername = (username) => {
     this.props.dispatch(loginUsername(username))
@@ -65,18 +70,15 @@ class Login extends Component {
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
-  renderWhiteTransition () {
-    if (this.props.whiteOverlayVisible) {
-      return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
-    } else {
-      return null
-    }
-  }
+  // renderWhiteTransition () {
+  //   if (this.props.whiteOverlayVisible) {
+  //     return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
+  //   } else {
+  //     return null
+  //   }
+  // }
   handleViewPress () {
     this.props.dispatch(closeUserList())
-  }
-  _handleOpenForgotPasswordModal = () => {
-    this.props.dispatch(openForgotPasswordModal())
   }
   usernameKeyPressed = (e) => {
     if (e.charCode == 13) {
@@ -86,7 +88,6 @@ class Login extends Component {
 
   render () {
 
-
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -95,18 +96,12 @@ class Login extends Component {
       }
     }
 
-    let heightBelowView = '90px'
-    let heightFieldsView = 0
-    let opacityFieldsView = 0
-
-    if (this.props.viewPassword) {
-      heightBelowView = 0
-      heightFieldsView = '90px'
-      opacityFieldsView = 1
-    }
-
-    if (this.props.viewPIN) {
-      return (<LoginWithPin />)
+    if (!this.props.viewPassword && this.props.viewPIN) {
+      return (
+        <div className={styles.container}>
+          <LoginWithPin />
+        </div>
+      )
     }
 
     if(!this.props.viewPassword && !this.props.viewPIN){
@@ -114,9 +109,9 @@ class Login extends Component {
         <div className={styles.container}>
           <LoginEdge />
           <div className={styles.buttonGroup}>
-            <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+            <Button raised primary theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
             <div ref='fieldsBelowView' style={{height: '90px'}} />
-            <a>Already have an account? Log in</a>
+            <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account? Log in</a>
           </div>
           <ForgotPassword />
         </div>
@@ -125,8 +120,8 @@ class Login extends Component {
 
     if(this.props.viewPassword && !this.props.viewPIN){
       return (
-        <div style={style.container}>
-          <div style={style.form}>
+        <div className={styles.container}>
+          <div>
             <LoginEdge />
             <div ref='fieldsView' className={styles.fieldsView}>
 
@@ -160,9 +155,9 @@ class Login extends Component {
             <div className={styles.buttonGroup}>
               <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
               <br />
-              <a>Create a New Account</a>
+              <a onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</a>
               <br />
-              <a className={styles.forgotPassword}>Forgot Password</a>
+              <a onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</a>
             </div>
           </div>
           <ForgotPassword />
@@ -172,38 +167,6 @@ class Login extends Component {
 
   }
 }
-
-const style = {
-
-  container: {
-    padding: '0 0.4em',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
-
-  form: {
-    flex: 1
-  },
-
-  whiteTransitionFade: {
-    position: 'absolute',
-    backgroundColor: '#FFF',
-    opacity: 1,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0
-  },
-}
-
-            // <div className={styles.buttonGroup}>
-            //   <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
-            //   <a>Create a New Account</a>
-            //   <br />
-            //   <a>Forgot Password</a>
-            // </div>
 
 Login = withRouter(Login)
 export default connect(state => ({
