@@ -12,10 +12,11 @@ import { changeSignupPage } from '../Signup/Signup.action'
 import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
+import styles from './PinNumber.webStyle'
+
 class PinComponent extends Component {
 
   _handleSubmit = (e) => {
-    e.preventDefault()
     this.props.dispatch(
      checkPIN(
         this.props.pin,
@@ -32,13 +33,16 @@ class PinComponent extends Component {
     )
   }
 
-  _handleOnChangeText = (value) => {
-    if (value.length > 4) {
-      value = value.substr(0, 4)
+  _handleOnChangeText = (pin) => {
+    if (pin.length > 4) {
+      pin = pin.substr(0, 4)
     }
     this.props.dispatch(
-      changePinNumberValue(value)
+      changePinNumberValue(pin)
     )
+    if (pin.length > 3) {
+      setTimeout(this._handleSubmit, 200)
+    }
   }
 
   pinStyle = () => {
@@ -53,23 +57,31 @@ class PinComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_back')}</Button>
-          <div style={{textAlign: 'center', fontSize: '16px', padding: '10px'}}>{t('activity_signup_pin_label')}</div>
+          <a className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</a>
+          <div className={styles.title}>
+            <h4>{t('activity_signup_pin_label')}</h4>
+          </div>
         </div>
-            <form onSubmit={e => this._handleSubmit(e)}>
-              <Input
-                ref='signupPin'
-                type="password"
-                style={this.pinStyle()}
-                autoFocus
-                name="pin"
-                onChange={this._handleOnChangeText}
-                value={this.props.pin}
-                placeholder={t('activity_signup_pin_hint')}
-              />
-            </form>
-            <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_pin_text')}</p>
+        <form  className={styles.containerBody} onSubmit={e => this._handleSubmit(e)}>
+          <div className={styles.inputDiv}>
+            <Input
+              ref='signupPin'
+              type="password"
+              name="pin"
+              autoFocus
+              placeholder={t('activity_signup_pin_hint')}
+              style={this.pinStyle()}
+              onChange={this._handleOnChangeText}
+              value={this.props.pin}
+            />
+          </div>
+          <div className={styles.section}>
+            <p className={styles.text}>{t('fragment_setup_pin_text')}</p>
+          </div>
+          <div className={styles.buttonSection}>
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          </div>
+        </form>
       </div>
     )
   }

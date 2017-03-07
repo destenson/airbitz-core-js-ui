@@ -3,7 +3,10 @@
 }
 
 .exitButton {
-  font-size: $unit * 2;
+  font-size: $unit * 2.2;
+  position: absolute;
+  top: 8px;
+  left: 0;
 }
 
 .title {
