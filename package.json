@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "airbitz-core-js": "~0.0.11",
+    "airbitz-core-js": "^0.1.1",
     "async": "~2.0.1",
     "autoprefixer": "~6.6.1",
     "extract-text-webpack-plugin": "~1.0.1",

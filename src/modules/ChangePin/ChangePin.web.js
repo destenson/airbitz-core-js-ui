@@ -2,17 +2,29 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
-
-import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
-import { checkPin } from './ChangePin.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import Dialog from 'react-toolbox/lib/dialog'
 import Input from 'react-toolbox/lib/input'
 
+import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { checkPin } from './ChangePin.middleware'
+
 class ChangePin extends Component {
 
   _handleSubmit = () => {
-    const callback = () => null
+    const callback = (error) => {
+      if(!error){
+        this.props.dispatch(pinChanged())
+        if (window.parent.loginCallback) {
+          window.parent.loginCallback(null, account)
+        }
+        if (!window.parent.loginCallback) {
+          this.props.dispatch(closeLoading())
+          this.props.dispatch(hidePinView())
+        }
+      }
+    }
     this.props.dispatch(
       checkPin(
         this.props.password,
