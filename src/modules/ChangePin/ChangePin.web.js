@@ -16,10 +16,10 @@ class ChangePin extends Component {
     const callback = (error) => {
       if(!error){
         this.props.dispatch(pinChanged())
-        if (window.parent.loginCallback) {
-          window.parent.loginCallback(null, account)
+        if (window.parent.exitCallback) {
+          window.parent.exitCallback(null)
         }
-        if (!window.parent.loginCallback) {
+        if (!window.parent.exitCallback) {
           this.props.dispatch(closeLoading())
           this.props.dispatch(hidePinView())
         }
@@ -49,7 +49,7 @@ class ChangePin extends Component {
 
   buttons = [
     { label: "Close", onClick: this._handleHideModal },
-    { label: "Submit", onClick: this._handleSubmit }
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true }
   ]
 
   _renderNotification = () => {
@@ -75,7 +75,6 @@ class ChangePin extends Component {
         onOverlayClick={this._handleHideModal}
         title={t('activity_signup_title_change_pin')}
       >
-        {this._renderNotification()}
         <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
         <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
       </Dialog>

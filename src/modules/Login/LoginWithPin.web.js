@@ -29,7 +29,7 @@ class LoginWithPin extends Component {
             window.parent.loginCallback(null, account)
           }
           if (!window.parent.loginCallback) {
-            dispatch(closeLoading())
+            this.propsdispatch(closeLoading())
             this.props.router.push('/home')
           }
         } else {

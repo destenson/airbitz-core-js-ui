@@ -9,7 +9,6 @@ import { withRouter } from 'react-router'
 
 import ChangePin from '../ChangePin/ChangePin.web'
 import ChangePassword from '../ChangePassword/ChangePassword.web'
-import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 
 import { showPinView } from '../ChangePin/ChangePin.action'
 import { showPasswordView } from '../ChangePassword/ChangePassword.action'
@@ -18,9 +17,13 @@ import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.a
 class Home extends Component {
 
   _handleLogout = () => {
-    if (window.parent.exitCallback) {
-      window.parent.exitCallback()
-    }
+      if (window.parent.exitCallback) {
+        window.parent.exitCallback(null)
+      }
+      if (!window.parent.exitCallback) {
+        this.props.dispatch(closeLoading())
+        this.props.router.push('/')
+      }
   }
 
   _handleChangePin = () => {
@@ -50,9 +53,8 @@ class Home extends Component {
         <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
         <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
         <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
-        <ChangePin />
+       <ChangePin />
         <ChangePassword />
-        <PasswordRecovery />
       </div>
     )
   }
