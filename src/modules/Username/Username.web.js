@@ -5,13 +5,9 @@ import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
-
-import { fadeWhiteOverlay } from '../Landing.action'
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
-
-import { checkUsername } from './Username.middleware'
 import t from 'lib/web/LocaleStrings'
 
+import { checkUsername } from './Username.middleware'
 import { changeUsernameValue } from './Username.action'
 import { changeSignupPage } from '../Signup/Signup.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
@@ -55,8 +51,8 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <a onClick={this._handleBack}>{t('string_capitalize_exit')}</a>
-          <div style={{textAlign: 'center'}}>
+          <a className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_exit')}</a>
+          <div className={styles.title}>
             <h4>{t('fragment_setup_username_label')}</h4>
           </div>
         </div>
