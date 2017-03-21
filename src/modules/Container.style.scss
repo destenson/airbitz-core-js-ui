@@ -9,3 +9,15 @@
 .topLevelDialog section {
     padding: 65px 45px 0 45px;  
 }
+
+@media only screen and (min-width : $layout-breakpoint-xs) {
+    .topLevelDialog.dialog.normal {
+        min-width: 80vw;
+    }
+}
+
+@media only screen and (min-width : $layout-breakpoint-sm) {
+    .topLevelDialog.dialog.normal {
+        min-width: 60vw;
+    }
+}
