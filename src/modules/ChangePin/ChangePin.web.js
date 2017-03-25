@@ -19,7 +19,6 @@ class ChangePin extends Component {
     const callback = (error) => {
       if(!error){
         this.props.dispatch(hidePinView())
-        this.props.dispatch(showPinChangedNotification())
       }
     }
     this.props.dispatch(
@@ -50,27 +49,10 @@ class ChangePin extends Component {
     this.props.dispatch(hidePinView())
   }
 
-  _handleNotificationClose = () => {
-    return this.props.dispatch(hidePinChangedNotification())
-  }
-
   buttons = [
     { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
     { label: "Close", onClick: this._handleHideModal, theme: neutralButtons }
   ]
-
-  _renderNotification = () => {
-    const { pinChangedNotification, dispatch } = this.props
-
-    return <Snackbar
-      action='Dismiss'
-      active={pinChangedNotification}
-      label={t('activity_signup_pin_change_good')}
-      timeout={5000}
-      type='accept'
-      onClick={this._handleNotificationClose}
-      onTimeout={this._handleNotificationClose} />
-  }
 
   render () {
     const { view, pin, password } = this.props
@@ -86,7 +68,6 @@ class ChangePin extends Component {
           <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
           <Input type='password' name='changePin' onChange={this._handleOnChangePin} value={pin} maxLength={4} label='New Pin' />
         </Dialog>
-        {this._renderNotification()}
       </div>
     )
   }
@@ -97,7 +78,6 @@ export default connect(state => ({
   view                    : state.changePin.view,
   password                : state.changePin.password,
   pin                     : state.changePin.pin,
-  pinChangedNotification  : state.changePin.pinChangedNotification,
   user                    : state.user
 
 }))(ChangePin)

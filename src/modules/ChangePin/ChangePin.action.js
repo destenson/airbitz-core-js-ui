@@ -39,14 +39,3 @@ export function pinChanged () {
     type: PIN_CHANGED
   }
 }
-export function showPinChangedNotification () {
-  return {
-    type: SHOW_PIN_CHANGED_NOTIFICATION
-  }
-}
-
-export function hidePinChangedNotification () {
-  return {
-    type: HIDE_PIN_CHANGED_NOTIFICATION
-  }
-}

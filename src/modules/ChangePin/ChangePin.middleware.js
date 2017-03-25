@@ -1,6 +1,7 @@
 import { pinChanged, hidePinView, showPinChangedNotification } from './ChangePin.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { showContainerNotification } from '../Container.action'
 
 export const checkPin = (password, pin, account, callback) => {
   return (dispatch, getState, imports) => {
@@ -26,6 +27,7 @@ export const checkPin = (password, pin, account, callback) => {
           }
           if (!error) {
             dispatch(pinChanged())
+            dispatch(showContainerNotification(t('activity_signup_pin_change_good'), 'default'))
             return callback(null)
           }
         })
