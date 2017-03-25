@@ -1,6 +1,7 @@
 import { passwordChanged, hidePasswordView, showPasswordChangedNotification } from './ChangePassword.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { showContainerNotification } from '../Container.action'
 
 export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, validation, account, callback) => {
   return (dispatch, getState, imports) => {
@@ -35,7 +36,7 @@ export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, valid
               if (!error) {
                 dispatch(passwordChanged())
                 dispatch(hidePasswordView())
-                return dispatch(showPasswordChangedNotification())
+                return dispatch(showContainerNotification('Your password has been successfully changed.', 'default'))
               }
             })
           }

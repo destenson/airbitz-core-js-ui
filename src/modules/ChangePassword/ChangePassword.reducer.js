@@ -58,14 +58,3 @@ export const newPasswordRepeat = (state = '', action) => {
       return state
   }
 }
-
-export const passwordChangedNotification = (state = false, action) => {
-  switch (action.type) {
-    case ACTION.SHOW_PASSWORD_CHANGED_NOTIFICATION:
-      return true
-    case ACTION.HIDE_PASSWORD_CHANGED_NOTIFICATION:
-      return false
-    default:
-      return state
-  }
-}

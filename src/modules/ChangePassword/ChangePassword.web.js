@@ -5,9 +5,8 @@ import FontIcon from 'react-toolbox/lib/font_icon';
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
-import { hidePasswordView, showPasswordView, changePasswordHidePassword, changePasswordShowPassword, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification, showPasswordChangedNotification } from './ChangePassword.action'
+import { hidePasswordView, showPasswordView, changePasswordHidePassword, changePasswordShowPassword, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue } from './ChangePassword.action'
 import { checkPassword } from './ChangePassword.middleware'
-import Snackbar from 'react-toolbox/lib/snackbar'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
 
@@ -21,7 +20,6 @@ class ChangePassword extends Component {
     const callback = (error) => {
       if(!error){
         this.props.dispatch(hidePasswordView())
-        this.props.dispatch(showPasswordChangedNotification())
       }
     }
     this.props.dispatch(
@@ -57,10 +55,6 @@ class ChangePassword extends Component {
     this.props.dispatch(hidePasswordView())
   }
 
-  _handleNotificationClose = () => {
-    return this.props.dispatch(hidePasswordChangedNotification())
-  }
-
   toggleRevealPassword = (e) => {
     if (this.props.revealPassword) {
       return this.props.dispatch(changePasswordHidePassword())
@@ -73,18 +67,6 @@ class ChangePassword extends Component {
     { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
     { label: "Close", onClick: this._handleHideModal, theme: neutralButtons}
   ]
-
-  _renderNotification = () => {
-    const { passwordChangedNotification, dispatch } = this.props
-    return <Snackbar
-      action='Dismiss'
-      active={passwordChangedNotification}
-      label={t('activity_signup_password_change_good')}
-      timeout={5000}
-      type='accept'
-      onClick={this._handleNotificationClose}
-      onTimeout={this._handleNotificationClose} />
-  }
 
   render () {
     const { view, oldPassword, newPassword, validation, newPasswordRepeat } = this.props
@@ -123,7 +105,6 @@ class ChangePassword extends Component {
             </p>
           </div>
         </Dialog>
-        {this._renderNotification()}
       </div>
     )
   }
@@ -136,7 +117,6 @@ export default connect(state => ({
   oldPassword: state.changePassword.oldPassword,
   newPassword: state.changePassword.newPassword,
   newPasswordRepeat: state.changePassword.newPasswordRepeat,
-  passwordChangedNotification: state.changePassword.passwordChangedNotification,
   validation: state.password.validation,
   user: state.user
 
