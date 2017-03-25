@@ -16,7 +16,6 @@ import LoginWithPin from './LoginWithPin.web'
 import LoginEdge from './LoginEdge.web'
 import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
-import Snackbar from 'react-toolbox/lib/snackbar'
 import { showWhiteOverlay } from '../Landing.action'
 
 import signinButton from 'theme/signinButton.scss'
@@ -102,22 +101,6 @@ class Login extends Component {
     }
   }
 
-  _handleNotificationClose = () => {
-    return this.props.dispatch(hideLoginNotification())
-  }
-
-  _renderNotification = (errorString) => {
-    const { loginNotification, dispatch } = this.props
-    return <Snackbar
-      action='Dismiss'
-      active={loginNotification}
-      label={t(errorString)}
-      timeout={5000}
-      type='accept'
-      onClick={this._handleNotificationClose}
-      onTimeout={this._handleNotificationClose} />
-  }
-
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {
@@ -148,7 +131,6 @@ class Login extends Component {
       return (
         <div className={styles.container}>
           <LoginWithPin />
-          {this._renderNotification()}
         </div>
       )
     }
@@ -163,7 +145,6 @@ class Login extends Component {
             <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account?<br />Log in</a>
           </div>
           <ForgotPassword />
-          {this._renderNotification()}
         </div>
       )
     }
@@ -201,7 +182,6 @@ class Login extends Component {
             </div>
           </div>
           <ForgotPassword />
-          {this._renderNotification()}
         </div>
       )
     }
@@ -216,7 +196,6 @@ export default connect(state => ({
   viewPassword: state.login.viewPassword,
   username: state.login.username,
   password: state.login.password,
-  loginNotification: state.login.loginNotification,
   showCachedUsers: state.login.showCachedUsers,
   edgeObject: state.login.edgeLoginResults,
   loginPasswordWait: state.login.loginPasswordWait,
